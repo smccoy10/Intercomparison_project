@@ -1,12 +1,7 @@
 function log_P = get_log_target(g,z,params)
 
-if nargin<1
-    log_P = 6; % posterior, likelihood, priors
-    return
-end
-
 % compute the log-posterior
-log_P = nan(get_log_target,1);
+log_P = NaN(6,1);
 
 %% Likelihood (z's with a marginalized tau)
 x = get_x(g,params.t,params.t_min,params.t_max);
@@ -26,7 +21,6 @@ log_P(5) = (params.phi_Q  - 1)* log(g(3)) - ...
 % (N0)
 log_P(6) = (params.phi_N0  - 1)* log(g(4)) - ...
     g(4) * params.phi_N0 / params.psi_N0;
-
 
 %% Posterior
 log_P(1) = sum(log_P(2:end));

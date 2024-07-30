@@ -1,7 +1,6 @@
 clear
 %% import data
-addpath(genpath("./../"))
-[time, z] = importfile("data/in_silico_growth_curve.csv");
+[time, z] = importfile("../data/in_silico_growth_curve.csv");
 
 %% initialize parameters
 % mu
@@ -31,7 +30,7 @@ params.N = size(time,1);
 
 
 %% Run sampler
-num_samples = 500; % Number of samples to run
+num_samples = 50000; % Number of samples to run
 rec = zeros(2,5); %Track acceptance of each sampler (each var, all)
 
 store_g   = nan(num_samples,4); % mu, K, Q, N0
@@ -63,4 +62,4 @@ end
 store_g = store_g((ceil(length(store_g)/2)+1:end),:);
 store_LogP = store_LogP((ceil(length(store_LogP)/2)+1:end),:);
 %% save data
-save results/sampler_out.mat store_g store_LogP
+save ../results/sampler_out.mat store_g store_LogP
