@@ -63,3 +63,9 @@ store_g = store_g((ceil(length(store_g)/2)+1:end),:);
 store_LogP = store_LogP((ceil(length(store_LogP)/2)+1:end),:);
 %% save data
 save ../results/sampler_out.mat store_g store_LogP
+
+%% write posterior samples to csv
+store_g(:,3) = store_g(:,3) * 1e-6;
+T = array2table(store_g, 'VariableNames', {'mu', 'K', 'Q', 'N0'});
+writetable(T, '../results/posterior_samples.csv');
+
