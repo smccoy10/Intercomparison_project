@@ -5,8 +5,8 @@ function [g_current,target_current,rec] = sampler_update(g_current,target_curren
 samp_g = g_current;
 
 %% Sample random collections of the parameters
-for rep=1:5
-scase = randi(5); % generate random case
+for rep=1:4
+scase = randi(4); % generate random case
 
 switch scase 
     % N.B. sample gammas for the beta = G1 / (G1 + G2) speed up
@@ -16,27 +16,6 @@ switch scase
        else
             samp_g(scase) = g_current(scase) * (1 + randg(1)/ randg(params.run_alpha(scase)));
        end
-    otherwise % sample all
-        if rand < .5
-            samp_g(1)   = g_current(1) / (1 + randg(1)/ randg(params.run_alpha(1)));
-        else
-            samp_g(1)   = g_current(1) * (1 + randg(1)/ randg(params.run_alpha(1)));
-        end
-        if rand < .5
-            samp_g(2)   = g_current(2) / (1 + randg(1)/ randg(params.run_alpha(2)));
-        else
-            samp_g(2)   = g_current(2) * (1 + randg(1)/ randg(params.run_alpha(2)));
-        end
-        if rand < .5
-            samp_g(3)   = g_current(3) / (1 + randg(1)/ randg(params.run_alpha(3)));
-        else
-            samp_g(3)   = g_current(3) * (1 + randg(1)/ randg(params.run_alpha(3)));
-        end
-        if rand < .5
-            samp_g(4)   = g_current(4) / (1 + randg(1)/ randg(params.run_alpha(4)));
-        else
-            samp_g(4)   = g_current(4) * (1 + randg(1)/ randg(params.run_alpha(4)));
-        end
 
 end % ends switch 
 
